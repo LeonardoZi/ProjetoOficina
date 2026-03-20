@@ -1,0 +1,99 @@
+.calendar {
+    height: 100%;
+}
+
+:global(.rbc-toolbar) {
+    font-size: 20px;
+    margin: 0.5rem;
+}
+
+:global(.rbc-toolbar button) {
+    font-size: 15px;
+    font-weight: bold;
+    border: 1px solid #000;
+}
+
+:global(.rbc-month-view) {
+    border-top: 1px solid #000;
+}
+
+:global(.rbc-header) {
+    border-bottom: 1px solid #000;
+}
+
+:global(.rbc-time-header-cell) {
+    font-weight: bolder;
+}
+
+:global(.rbc-month-row+ .rbc-month-row) {
+    border-color: #000000;
+}
+
+:global(.rbc-day-bg+ .rbc-day-bg) {
+    border-color: #000000;
+}
+
+:global(.rbc-now .rbc-button-link) {
+    font-weight: bold;
+}
+
+:global(.rbc-day-slot, .rbc-timeslot-group, .rbc-time-slot) {
+    border-color: #000;
+    border-left: 1px solid #000;
+    color: #000;
+}
+
+:global(.rbc-allday-cell) {
+    border: 1px solid black;
+    border-bottom: none;
+    border-top: none;
+}
+
+:global(.rbc-time-header.rbc-overflowing) {
+    border-right: none;
+    border-bottom: none;
+}
+
+:global(.rbc-time-view .rbc-time-content) {
+    border-top: none;
+}
+
+:global(.rbc-header span) {
+    font-weight: bold;
+}
+
+:global(.rbc-agenda-date-cell),
+:global(.rbc-agenda-time-cell) {
+    background-color: #dadada;
+}
+
+:global(.rbc-agenda-date-cell),
+:global(.rbc-agenda-time-cell),
+:global(.rbc-agenda-event-cell) {
+    border: 1px solid #000;
+}
+
+:global(.rbc-agenda-event-cell) {
+    font-weight: bold;
+}
+
+.toolbarContainer{
+    display: flex;
+    height: 10vh;
+    align-items: center;
+    padding-left: 50px;
+}
+
+.mesAno{
+    width: 50%;
+    justify-content: flex-start;
+    font-size: 2rem;
+}
+
+.dirTop{
+    width: 50%;
+    justify-content: end;
+    display: flex;
+    align-items: center;
+    padding-right: 50px;
+}
