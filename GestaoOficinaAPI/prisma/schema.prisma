@@ -1,0 +1,113 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+enum TipoOS {
+  SERVICO
+  VENDA
+}
+
+enum StatusOS {
+  ABERTA
+  EM_ANDAMENTO
+  AGUARDANDO_PECA
+  AGUARDANDO_APROVACAO
+  CONCLUIDA
+  CANCELADA
+}
+
+model Cliente {
+  id          Int       @id   @default(autoincrement())
+  nome        String
+  telefone    String?
+  email       String?
+  cpf         String    @unique
+  criadoEm    DateTime  @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  veiculos    Veiculo[]
+  ordens      OrdemServico[]
+}
+
+model Veiculo {
+  id          Int       @id   @default(autoincrement())
+  clienteId   Int
+  cliente     Cliente   @relation(fields: [clienteId], references: [id])
+  marca       String
+  modelo      String
+  ano         Int?
+  placa       String?   @unique
+  cor         String?
+  observacao  String?
+  criadoEm    DateTime  @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  ordens      OrdemServico[]
+}
+
+model OrdemServico {
+  id          Int       @id   @default(autoincrement())
+  clienteId   Int
+  cliente     Cliente   @relation(fields: [clienteId], references: [id])
+  veiculoId   Int?
+  veiculo     Veiculo?   @relation(fields: [veiculoId], references: [id])
+  kmEntrada   Int?
+  kmSaida     Int?
+  valorTotal   Float?
+  tipo        TipoOS     @default(SERVICO)
+  reclamacao  String?
+  descricao   String?
+  status      StatusOS    @default(ABERTA)
+  dataAgendada  DateTime?
+  dataConclusao DateTime?
+  criadoEm    DateTime  @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  itens       ItemOS[]
+  servicos    ServicoOS[]
+}
+
+model Produto {
+  id          Int       @id   @default(autoincrement())
+  nome        String 
+  quantidade  Int       @default(0)
+  categoria   String?
+  precoCompra Float
+  precoVenda  Float
+  criadoEm    DateTime  @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  itens        ItemOS[]
+}
+
+model ItemOS {
+  id           Int          @id @default(autoincrement())
+  ordemId      Int
+  ordem        OrdemServico @relation(fields: [ordemId], references: [id])
+  produtoId    Int
+  produto      Produto      @relation(fields: [produtoId], references: [id])
+  quantidade   Int          @default(1)
+  valorUnitario Float
+  criadoEm    DateTime  @default(now())
+  atualizadoEm DateTime @updatedAt
+}
+
+model ServicoOS {
+  id           Int          @id @default(autoincrement())
+  ordemId      Int
+  ordem        OrdemServico @relation(fields: [ordemId], references: [id])
+  descricao    String
+  valor        Float
+  criadoEm     DateTime     @default(now())
+  atualizadoEm DateTime     @updatedAt
+}

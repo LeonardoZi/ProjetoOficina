@@ -1,0 +1,106 @@
+### ==================
+### ORDENS DE SERVIÇO
+### ==================
+
+### Listar todas as ordens
+GET http://localhost:3000/ordens
+
+### Buscar ordem por ID
+GET http://localhost:3000/ordens/4
+
+### Buscar ordens por cliente
+GET http://localhost:3000/ordens/cliente/4
+
+### Buscar ordens por status
+GET http://localhost:3000/ordens/status/CONCLUIDA
+
+### Criar ordem de serviço (com veículo)
+POST http://localhost:3000/ordens
+Content-Type: application/json
+
+{
+    "clienteId": 4,
+    "veiculoId": 4,
+    "kmEntrada": 85000,
+    "tipo": "SERVICO",
+    "reclamacao": "Carro fazendo barulho no freio traseiro",
+    "descricao": "Verificar pastilhas e disco de freio",
+    "dataAgendada": "2026-03-25T09:00:00"
+}
+
+### Criar ordem de serviço (sem veículo - venda balcão)
+POST http://localhost:3000/ordens
+Content-Type: application/json
+
+{
+    "clienteId": 4,
+    "tipo": "VENDA",
+    "reclamacao": "Cliente veio comprar fluido de freio"
+}
+
+### Atualizar status da ordem
+PUT http://localhost:3000/ordens/4
+Content-Type: application/json
+
+{
+    "status": "EM_ANDAMENTO"
+}
+
+### Concluir ordem
+PUT http://localhost:3000/ordens/2
+Content-Type: application/json
+
+{
+    "status": "CONCLUIDA",
+    "kmSaida": 85050,
+    "dataConclusao": "2026-03-25T17:00:00",
+    "valorTotal": 350.00
+}
+
+### Deletar ordem
+DELETE http://localhost:3000/ordens/1
+
+### ==================
+### ITENS DA OS
+### ==================
+
+### Adicionar item (produto) na OS
+POST http://localhost:3000/ordens/itens
+Content-Type: application/json
+
+{
+    "ordemId": 4,
+    "produtoId": 2,
+    "quantidade": 2,
+    "valorUnitario": 45.00
+}
+
+### Remover item da OS
+DELETE http://localhost:3000/ordens/itens/1
+
+### ==================
+### SERVIÇOS DA OS
+### ==================
+
+### Adicionar serviço na OS
+POST http://localhost:3000/ordens/servicos
+Content-Type: application/json
+
+{
+    "ordemId": 4,
+    "descricao": "Troca de pastilha de freio traseira",
+    "valor": 120.00
+}
+
+### Adicionar outro serviço na OS
+POST http://localhost:3000/ordens/servicos
+Content-Type: application/json
+
+{
+    "ordemId": 4,
+    "descricao": "Alinhamento e balanceamento",
+    "valor": 80.00
+}
+
+### Remover serviço da OS
+DELETE http://localhost:3000/ordens/servicos/1

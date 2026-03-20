@@ -1,0 +1,58 @@
+### ==================
+### PRODUTOS
+### ==================
+
+### Listar todos os produtos
+GET http://localhost:3000/produtos
+
+### Listar todas as categorias
+GET http://localhost:3000/produtos/categorias
+
+### Listar produtos por categoria
+GET http://localhost:3000/produtos/categoria/Lubrificantes
+
+### Buscar produto por ID
+GET http://localhost:3000/produtos/1
+
+### Criar produto
+POST http://localhost:3000/produtos
+Content-Type: application/json
+
+{
+    "nome": "Óleo Motor 5W30",
+    "quantidade": 50,
+    "categoria": "Lubrificantes",
+    "precoCompra": 25.00,
+    "precoVenda": 45.00
+}
+
+### Criar produto sem categoria
+POST http://localhost:3000/produtos
+Content-Type: application/json
+
+{
+    "nome": "Filtro de Óleo",
+    "quantidade": 30,
+    "precoCompra": 10.00,
+    "precoVenda": 22.00
+}
+
+### Atualizar produto
+PUT http://localhost:3000/produtos/1
+Content-Type: application/json
+
+{
+    "nome": "Óleo Motor 5W30 Sintético",
+    "precoVenda": 50.00
+}
+
+### Atualizar quantidade em estoque
+PUT http://localhost:3000/produtos/1
+Content-Type: application/json
+
+{
+    "quantidade": 100
+}
+
+### Deletar produto
+DELETE http://localhost:3000/produtos/1

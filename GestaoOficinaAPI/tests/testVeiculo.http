@@ -1,0 +1,34 @@
+### Listar todos os veículos
+GET http://localhost:3000/veiculos
+
+### Buscar veículo por ID
+GET http://localhost:3000/veiculos/3
+
+### Buscar veículos por cliente
+GET http://localhost:3000/veiculos/cliente/4
+
+### Criar veículo
+POST http://localhost:3000/veiculos
+Content-Type: application/json
+
+{
+    "clienteId": 4,
+    "marca": "Volkswagen",
+    "modelo": "Fox",
+    "ano": 2015,
+    "placa": "ABC1234",
+    "cor": "Prata",
+    "observacao": "Para-choque traseiro amassado"
+}
+
+### Atualizar veículo
+PUT http://localhost:3000/veiculos/3
+Content-Type: application/json
+
+{
+    "cor": "Branco",
+    "observacao": "Arranhado no lado direito"
+}
+
+### Deletar veículo
+DELETE http://localhost:3000/veiculos/3
