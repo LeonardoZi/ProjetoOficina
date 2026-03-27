@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './Agendamentos.module.css'
+import moment from 'moment'
 
 const Agendamentos = () => {
 
-  const agendamentosLista = [
-    { id: 1, cliente: "João Marcio dos Santos", os: "1", servico: "Troca de óleo", data: "12/03", hora: "14:00" },
-    { id: 2, cliente: "Maria Betânia", os: "2", servico: "Revisão completa", data: "12/03", hora: "16:00" },
-    { id: 3, cliente: "Roger Banana", os: "3", servico: "Motor aquecendo", data: "13/03", hora: "9:00" },
-    { id: 4, cliente: "Roger Banana", os: "3", servico: "Motor aquecendo", data: "13/03", hora: "9:00" }
-  ]
+  const [eventsList, setEventsList] = useState([]);
+
+  useEffect(() => {
+    fetch("https://projetooficina-la3z.onrender.com/ordens")
+      .then(res => res.json())
+      .then(eventsList => {setEventsList(eventsList); console.log(eventsList)})
+      .catch(err => console.error(err))
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -16,13 +19,17 @@ const Agendamentos = () => {
       <h2 className={styles.titulo}>Próximos Agendamentos</h2>
 
       <div className={styles.lista}>
-        {agendamentosLista.map((agendamento) => (
-          <div key={agendamento.id} className={styles.cardAgendamento}>
-            <h3>{agendamento.cliente}</h3>
-            <p>OS: {agendamento.os}</p>
-            <p>Serviço: {agendamento.servico}</p>
-            <p>Data agendada: {agendamento.data} {agendamento.hora}</p>
-          </div>
+        {eventsList.map((agendamento) => 
+          agendamento && (
+            <div key={agendamento.id} className={styles.cardAgendamento}>
+              <div className={styles.linhaTopo}>
+                <h3>{agendamento.cliente.nome}</h3>
+                <p>Data agendada: {moment(agendamento.dataAgendada).format('DD/MM/YYYY, HH:mm')}</p>
+              </div>          
+              <p>OS: {agendamento.id}</p>
+              <p>Veículo: {agendamento.veiculo.marca} {agendamento.veiculo.modelo}</p>
+              <p>Serviço: {agendamento.reclamacao}</p>
+            </div>
         ))}
       </div>
 

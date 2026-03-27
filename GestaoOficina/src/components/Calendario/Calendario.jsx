@@ -134,8 +134,8 @@ const CustomToolbar = ({ label, onView, onNavigate, views }) => {
 
                 <div className="toolbarNavigation" style={{marginLeft: '15px'}}>
                     <button className='btn btn-secondary btn-ls mr-2 border-0' onClick={() => onNavigate('TODAY')}>Hoje</button>
-                    <button className='btn btn-sm mr-2 text-secondary' onClick={()=> onNavigate('PREV')} style={{marginLeft: '15px', backgroundColor: "#6c757d", borderRadius: "10px"}}><i class="bi bi-caret-left" style={{padding: "5px", color: "#fff"}}></i></button>
-                    <button className='btn btn-sm mr-2 text-secondary' onClick={()=> onNavigate('NEXT')} style={{marginLeft: '2px', backgroundColor: "#6c757d", borderRadius: "10px"}}><i class="bi bi-caret-right" style={{padding: "5px", color: "#fff"}}></i></button>
+                    <button className='btn btn-sm mr-2 text-secondary' onClick={()=> onNavigate('PREV')} style={{marginLeft: '15px', backgroundColor: "#6c757d", borderRadius: "10px"}}><i className="bi bi-caret-left" style={{padding: "5px", color: "#fff"}}></i></button>
+                    <button className='btn btn-sm mr-2 text-secondary' onClick={()=> onNavigate('NEXT')} style={{marginLeft: '2px', backgroundColor: "#6c757d", borderRadius: "10px"}}><i className="bi bi-caret-right" style={{padding: "5px", color: "#fff"}}></i></button>
                 </div>
 
             </div>

@@ -28,6 +28,12 @@
     overflow-x: hidden;
 }
 
+.linhaTopo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .cardAgendamento:hover{
     background-color: rgba(0, 0, 0, 0.03);
 }
