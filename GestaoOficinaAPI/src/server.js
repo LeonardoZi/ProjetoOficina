@@ -1,4 +1,5 @@
 import 'dotenv/config'
+import cors from "cors"
 import express from "express";
 import clienteRoutes from './routes/clienteRoutes.js'
 import veiculoRoutes from './routes/veiculoRoutes.js'
@@ -8,6 +9,7 @@ import ordemServicoRoutes from './routes/ordemServicoRoutes.js'
 const app = express()
 const port = 3000;
 
+app.use(cors())
 app.use(express.json())
 
 app.use('/clientes', clienteRoutes)

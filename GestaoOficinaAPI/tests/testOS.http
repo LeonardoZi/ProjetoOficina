@@ -19,12 +19,12 @@ POST http://localhost:3000/ordens
 Content-Type: application/json
 
 {
-    "clienteId": 4,
-    "veiculoId": 4,
+    "clienteId": 1,
+    "veiculoId": 1,
     "kmEntrada": 85000,
     "tipo": "SERVICO",
-    "reclamacao": "Carro fazendo barulho no freio traseiro",
-    "descricao": "Verificar pastilhas e disco de freio",
+    "reclamacao": "Carro com pintura danificada",
+    "descricao": "Carro apresenta riscos severos na pintura",
     "dataAgendada": "2026-03-25T09:00:00"
 }
 
