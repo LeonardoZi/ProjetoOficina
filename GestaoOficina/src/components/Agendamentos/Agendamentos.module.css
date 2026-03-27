@@ -1,3 +1,7 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
 .container{
     height: 100%;
     display: flex;
@@ -6,13 +10,14 @@
 
 .titulo{
     text-align: center;
-    border-bottom: 2px solid #000;
+    padding: 0.3rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.377);
     background-color: #719eff;
     color: #000;
 }
 
 .cardAgendamento{
-    padding: 1rem 1rem;
+    padding: 1rem 2rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     transition: background-color 0.2s ease;
 }

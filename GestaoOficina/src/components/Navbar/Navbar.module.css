@@ -3,7 +3,7 @@
     width: 100vw;
     /* background-color: rgb(18, 0, 66); */
     background-color: #719eff;
-    border-bottom: 3px solid rgb(18, 0, 66);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.445);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -49,12 +49,14 @@
 .links span{
     display: inline-block;
     transition: transform ease 0.2s, color 0.2 ease;
+    font-family: 'Poppins', sans-serif;
 }
 
 .loginSignup{
     color: #000000;
     font-weight: bold;
     font-size: 1.3rem;
+    font-family: 'Poppins', sans-serif;
 }
 
 .links span:hover{
