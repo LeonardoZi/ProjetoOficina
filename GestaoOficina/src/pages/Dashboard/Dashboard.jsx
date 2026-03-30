@@ -3,8 +3,12 @@ import styles from './Dashboard.module.css'
 import Button from '../../components/Button/Button'
 import Agendamentos from '../../components/Agendamentos/Agendamentos'
 import Calendario from '../../components/Calendario/Calendario'
+import { useNavigate } from 'react-router-dom'
 
 const Dashboard = () => {
+
+  const navegar = useNavigate()
+
   return (
     <div className={styles.bodyContainer}>
 
@@ -26,7 +30,7 @@ const Dashboard = () => {
           <div className={styles.buttons}>
 
             <Button text='Novo Serviço'/>
-            <Button text='Novo Cliente'/>
+            <Button path={() => navegar('clientes/novo')} text='Novo Cliente'/>
             <Button text='Novo Produto'/>
 
           </div>

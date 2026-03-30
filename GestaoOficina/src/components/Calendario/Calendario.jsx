@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import moment from 'moment'
 import 'moment/dist/locale/pt-br'
 import { Calendar, momentLocalizer } from 'react-big-calendar'
@@ -15,25 +15,48 @@ const localizer = momentLocalizer(moment);
 
 const Calendario = () => {
 
-    const [eventos, setEventos] = useState([{
-        id: 1,
-        title: 'Fox Oficina',
-        start: new Date(2026, 2, 19, 8, 0),
-        end: new Date(2026, 2, 19, 9, 0),
-        desc: 'Levar o Fox na oficina. OBS: Ir em 2 carros',
-        color: 'red',
-        tipo: 'atividade',
-    },
-    {
-        id: 2,
-        title: 'Mae Endocrino',
-        start: new Date(2026, 2, 19, 13, 0),
-        end: new Date(2026, 2, 19, 14, 0),
-        desc: 'Evento2',
-        color: 'blue',
-        tipo: 'atividade',
-    }
-    ])
+    const [eventsList, setEventsList] = useState([]);
+
+    useEffect(() => {
+        fetch("https://projetooficina-la3z.onrender.com/ordens")
+            .then(res => res.json())
+            .then(eventsList => {setEventsList(eventsList); console.log(eventsList)})
+            .catch(err => console.error(err))
+    }, [])
+
+    const eventsCalendar = eventsList.map(data => {
+        const newData = {
+            id: data.id,
+            title: data.cliente.nome,
+            start: new Date(data.dataAgendada),
+            end: new Date(new Date(data.dataAgendada).getTime() + 3600000)
+        }
+
+        return newData
+    })
+
+    console.log(eventsCalendar)
+
+
+    // const [eventos, setEventos] = useState([{
+    //     id: 1,
+    //     title: 'Fox Oficina',
+    //     start: new Date(2026, 2, 19, 8, 0),
+    //     end: new Date(2026, 2, 19, 9, 0),
+    //     desc: 'Levar o Fox na oficina. OBS: Ir em 2 carros',
+    //     color: 'red',
+    //     tipo: 'atividade',
+    // },
+    // {
+    //     id: 2,
+    //     title: 'Mae Endocrino',
+    //     start: new Date(2026, 2, 19, 13, 0),
+    //     end: new Date(2026, 2, 19, 14, 0),
+    //     desc: 'Evento2',
+    //     color: 'blue',
+    //     tipo: 'atividade',
+    // }
+    // ])
 
     const [eventoSelecionado, setEventoSelecionado] = useState(null);
 
@@ -51,21 +74,21 @@ const Calendario = () => {
         setEventoSelecionado(null);
     }
 
-    const moverEventos = (data) => {
-        const { start, end } = data;
-        const updatedEvents = eventos.map((event) => {
-            if (event.id === data.event.id) {
-                return {
-                    ...event,
-                    start: new Date(start),
-                    end: new Date(end)
-                };
-            }
-            return event;
-        });
+    // const moverEventos = (data) => {
+    //     const { event, start, end } = data;
+    //     const updatedEvents = eventsList.map((ordem) => {
+    //         if (ordem.id === event.id) {
+    //             return {
+    //                 ...ordem,
+    //                 start: new Date(start),
+    //                 end: new Date(end)
+    //             };
+    //         }
+    //         return event;
+    //     });
 
-        setEventos(updatedEvents)
-    }
+    //     setEventsList(updatedEvents)
+    // }
 
 
     return (
@@ -73,11 +96,11 @@ const Calendario = () => {
             <DragAndDropCalendar
                 defaultDate={moment().toDate()}
                 defaultView='month'
-                events={eventos}
+                events={eventsCalendar}
                 localizer={localizer}
                 resizable
-                onEventDrop={moverEventos}
-                onEventResize={moverEventos}
+                // onEventDrop={moverEventos}
+                // onEventResize={moverEventos}
                 onSelectEvent={handleEventClick}
                 eventPropGetter={eventStyle}
                 components={{

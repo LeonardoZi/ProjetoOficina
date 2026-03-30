@@ -3,8 +3,12 @@ import Dashboard from '../../pages/Dashboard/Dashboard'
 import { Link } from 'react-router-dom'
 import styles from "./Navbar.module.css"
 import imagemLogo from '../../assets/LogoOficina.png'
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
+
+    const navegar = useNavigate()
+
     return (
         <nav className={styles.navContainer}>
             <Link to="/" className={styles.logo}>
@@ -13,9 +17,9 @@ const Navbar = () => {
             </Link>
 
             <div className={styles.links}>
-                <a href="#"><span>Dashboard</span></a>
+                <a onClick={() => navegar('/')}><span>Dashboard</span></a>
                 <a href="#"><span>Estoque</span></a>
-                <a href="#"><span>Clientes</span></a>
+                <a onClick={() => navegar('/clientes')}><span>Clientes</span></a>
                 <a href="#"><span>Ordens de Serviço</span></a>
             </div>
 
