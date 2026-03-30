@@ -1,16 +1,16 @@
-.navContainer{
-    height: 4rem;
-    width: 100vw;
+.navContainer {
+    /* height: 4rem;
+    width: 100vw; */
     /* background-color: rgb(18, 0, 66); */
     background-color: #719eff;
     border-bottom: 3px solid rgba(0, 0, 0, 0.445);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    /* display: flex; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
     padding: 0.5rem;
 }
 
-.logo{
+.logo {
     height: 100%;
     display: flex;
     align-items: center;
@@ -21,10 +21,11 @@
     text-decoration: none;
 }
 
+
 .logo img {
-  height: 3rem;
-  width: auto;
-  object-fit: contain;
+    height: 3rem;
+    width: auto;
+    object-fit: contain;
 }
 
 .logo h1 {
@@ -34,38 +35,51 @@
     color: #fff;
 }
 
-.links{
+.links {
     display: flex;
     gap: 2rem;
+    text-align: center;
+    align-items: center;
 }
 
-.links a{
+.links a {
     color: #000000;
     font-weight: bold;
     text-decoration: none;
     font-size: 1.3rem;
 }
 
-.links span{
+.links span {
     display: inline-block;
     transition: transform ease 0.2s, color 0.2 ease;
     font-family: 'Poppins', sans-serif;
 }
 
-.loginSignup{
+.loginSignup {
     color: #000000;
     font-weight: bold;
     font-size: 1.3rem;
     font-family: 'Poppins', sans-serif;
 }
 
-.links span:hover{
+@media (max-width: 991px) {
+    .loginSignup {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding: 1.5rem 0;
+        margin-top: 0.5rem;
+    }
+}
+
+.links span:hover {
     transform: scale(1.05);
     color: #3d3d3d;
 }
 
-.links a:not(:last-child)::after {
-    content: "|";
-    margin-left: 2rem;
-    color: #000000;
+@media (min-width: 992px) {
+    .links a:not(:last-child)::after {
+        content: "|";
+        margin-left: 2rem;
+        color: #000000;
+    }
 }

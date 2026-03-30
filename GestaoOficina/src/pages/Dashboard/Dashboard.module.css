@@ -1,7 +1,7 @@
-.bodyContainer{
+.bodyContainer {
     /* background-color: rgb(13, 0, 48); */
     background: #F4F6F8;
-    background: linear-gradient(180deg,rgb(218, 216, 216) 0%, rgba(237, 242, 247, 1) 100%);
+    background: linear-gradient(180deg, rgb(218, 216, 216) 0%, rgba(237, 242, 247, 1) 100%);
     width: 100%;
     height: calc(100vh - 5rem);
     display: flex;
@@ -10,7 +10,7 @@
     overflow: hidden;
 }
 
-.centerBox{
+.centerBox {
     margin-top: 5px;
     width: 85%;
     max-width: 80rem;
@@ -23,7 +23,7 @@
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
-.coluna1{
+.coluna1 {
     border-right: 1px solid rgba(0, 0, 0, 0.377);
     background-color: #ffffff;
     width: 70%;
@@ -32,7 +32,7 @@
     flex-direction: column;
 }
 
-.coluna2{
+.coluna2 {
     /* background-color: bisque; */
     background-color: #ffffff;
     width: 30%;
@@ -42,7 +42,7 @@
     overflow: hidden;
 }
 
-.agendamentos{
+.agendamentos {
     border-bottom: 1px solid rgba(0, 0, 0, 0.377);
     /* background-color: bisque; */
     background-color: #ffffff;
@@ -53,7 +53,7 @@
     min-height: 0;
 }
 
-.calendario{
+.calendario {
     /* background-color: bisque; */
     background-color: #ffffff;
     width: 100%;
@@ -62,7 +62,7 @@
     min-height: 0;
 }
 
-.buttons{
+.buttons {
     /* background-color: bisque; */
     background-color: #ffffff;
     height: 30%;
@@ -73,4 +73,69 @@
     justify-content: center;
 }
 
+@media (max-width: 768px) {
 
+    :global(.rbc-agenda-view) {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 !important;
+        min-height: 300px !important;
+    }
+
+    :global(.rbc-agenda-content) {
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .centerBox {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        padding: 15px !important;
+        background-color: transparent !important;
+        height: auto !important;
+        border: none !important;
+        box-shadow: none !important;
+        width: 95% !important;
+        margin: 10px auto !important;
+        overflow: visible !important;
+    }
+
+    .coluna1, .buttons, .agendamentos {
+        background-color: #ffffff !important;
+        border-radius: 15px !important;
+        border: 1px solid rgba(0,0,0,0.1) !important;
+        padding: 15px !important;
+        width: 100% !important;
+    }
+
+    .buttons {
+        height: auto !important;
+        gap: 10px !important;
+    }
+
+    .agendamentos {
+        height: auto !important;
+        overflow-y: visible !important;
+    }
+
+    .bodyContainer {
+        height: auto !important;
+        min-height: calc(100vh - 5rem);
+        overflow: visible !important;
+        display: block !important;
+    }
+
+    .coluna1,
+    .coluna2 {
+        width: 100% !important;
+        height: auto !important;
+        flex: none !important;
+        border-right: none !important;
+    }
+
+    .calendario {
+        min-height: 300px !important;
+        width: 100% !important;
+    }
+}

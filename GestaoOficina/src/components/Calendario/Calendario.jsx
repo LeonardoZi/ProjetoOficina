@@ -19,6 +19,10 @@ const Calendario = () => {
     const [eventoSelecionado, setEventoSelecionado] = useState(null);
     const [showMoreData, setShowMoreData] = useState(null);
 
+    const [view, setView] = useState(() => {
+    return window.innerWidth < 768 ? 'agenda' : 'month';
+});
+
     useEffect(() => {
         fetch("https://projetooficina-la3z.onrender.com/ordens")
             .then(res => res.json())
@@ -38,58 +42,6 @@ const Calendario = () => {
     })
 
     console.log(eventsCalendar)
-
-    const CustomDateCellWrapper = ({ children, value }) => {
-        const dayEvents = eventsCalendar.filter(ev =>
-            moment(ev.start).isSame(value, 'day')
-        );
-
-        const MAX_VISIBLE = 2;
-        const visible = dayEvents.slice(0, MAX_VISIBLE);
-        const hidden = dayEvents.slice(MAX_VISIBLE);
-
-        return (
-            <div style={{ position: 'relative', flex: 1, minHeight: 0 }}>
-                {React.cloneElement(children, {}, null)}
-                <div style={{ padding: '0 2px' }}>
-                    {visible.map((ev, index) => (
-                        <div
-                            key={ev.id}
-                            onClick={() => setEventoSelecionado(ev)}
-                            style={{
-                                backgroundColor: '#3174ad',
-                                color: '#fff',
-                                borderRadius: '3px',
-                                padding: '1px 4px',
-                                fontSize: '0.75rem',
-                                marginBottom: '1px',
-                                marginTop: index === 0 ? '20px' : '0px',
-                                cursor: 'pointer',
-                                overflow: 'hidden',
-                                whiteSpace: 'nowrap',
-                                textOverflow: 'ellipsis',
-                            }}
-                        >
-                            {ev.title}
-                        </div>
-                    ))}
-                    {hidden.length > 0 && (
-                        <div
-                            onClick={() => setShowMoreData({ events: dayEvents, date: value })}
-                            style={{
-                                fontSize: '0.75rem',
-                                color: '#555',
-                                cursor: 'pointer',
-                                paddingLeft: '2px',
-                            }}
-                        >
-                            +{hidden.length} mais
-                        </div>
-                    )}
-                </div>
-            </div>
-        );
-    };
 
 
     const eventStyle = (event) => ({
@@ -132,9 +84,12 @@ const Calendario = () => {
         <>
             <DragAndDropCalendar
                 defaultDate={moment().toDate()}
-                defaultView='month'
+                view={view}
+                defaultView={view}
+                length={30}
+                onView={(newView) => setView(newView)}
                 // events={eventsCalendar}
-                events={[]}
+                events={eventsCalendar}
                 localizer={localizer}
                 resizable
                 // onEventDrop={moverEventos}
@@ -145,7 +100,6 @@ const Calendario = () => {
                 eventPropGetter={eventStyle}
                 components={{
                     toolbar: CustomToolbar,
-                    dateCellWrapper: CustomDateCellWrapper,
                 }}
                 className={styles.calendar}
             />
@@ -180,9 +134,8 @@ const Calendario = () => {
     )
 }
 
-const CustomToolbar = ({ label, onView, onNavigate, views }) => {
+const CustomToolbar = ({ label, onView, onNavigate, views, view }) => {
 
-    const [itemText, setItemText] = useState('month');
 
     const traducoesPTBR = {
         month: 'Mês',
@@ -201,13 +154,13 @@ const CustomToolbar = ({ label, onView, onNavigate, views }) => {
                 <div className={styles.dropdown}>
 
                     <button type="button" className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        {traducoesPTBR[itemText] || itemText}
+                        {traducoesPTBR[view] || view}
                     </button>
 
                     <ul className="dropdown-menu dropdown-menu-end">
                         {views.map((view, index) => (
                             <div key={index}>
-                                <li><button className='dropdown-item' onClick={() => onView(view) + setItemText(view)}>{traducoesPTBR[view] || view}</button></li>
+                                <li><button className='dropdown-item' onClick={() => onView(view)}>{traducoesPTBR[view] || view}</button></li>
                                 {index == 2 && <hr className='dropdownDivisor'></hr>}
                             </div>
                         ))}
