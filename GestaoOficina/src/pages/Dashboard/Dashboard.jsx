@@ -15,10 +15,7 @@ const Dashboard = () => {
       <div className={styles.centerBox}>
 
         <div className={styles.coluna1}>
-          
-          <div className={styles.agendamentos}>
-            <Agendamentos/>
-          </div>
+
           <div className={styles.calendario}>
             <Calendario></Calendario>
           </div>
@@ -29,10 +26,14 @@ const Dashboard = () => {
 
           <div className={styles.buttons}>
 
-            <Button text='Novo Serviço'/>
-            <Button path={() => navegar('clientes/novo')} text='Novo Cliente'/>
-            <Button text='Novo Produto'/>
+            <Button text='Novo Serviço' />
+            <Button path={() => navegar('clientes/novo')} text='Novo Cliente' />
+            <Button text='Novo Produto' />
 
+          </div>
+
+          <div className={styles.agendamentos}>
+            <Agendamentos />
           </div>
 
         </div>

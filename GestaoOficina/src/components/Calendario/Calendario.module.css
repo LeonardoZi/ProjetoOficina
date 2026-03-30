@@ -2,6 +2,7 @@
 
 .calendar {
     height: 100%;
+    position: relative;
 }
 
 :global(.rbc-toolbar) {
@@ -79,9 +80,21 @@
     font-weight: bold;
 }
 
+:global(.rbc-show-more) {
+    font-size: 0.8rem !important;
+    padding-top: 2px !important;
+}
+
+:global(.rbc-event) {
+    padding: 2px 5px !important;
+    min-height: 20px !important; 
+    font-size: 0.8rem !important;
+    margin-bottom: 2px !important;
+}
+
 .toolbarContainer{
     display: flex;
-    height: 10vh;
+    padding: 1rem 50px;
     align-items: center;
     padding-left: 50px;
 }
@@ -98,4 +111,72 @@
     display: flex;
     align-items: center;
     padding-right: 50px;
+}
+
+.popupOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popupBox {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    min-width: 220px;
+    max-width: 320px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.popupHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.popupHeader button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #666;
+}
+
+.popupList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.popupItem {
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.popupItem:hover {
+    background: #f0f4ff;
+}
+
+
+:global(.rbc-month-row) {
+    overflow: hidden !important;
+    min-height: 0 !important;
+}
+
+:global(.rbc-row-content) {
+    overflow: hidden !important;
 }

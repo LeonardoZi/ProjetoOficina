@@ -2,24 +2,24 @@
     /* background-color: rgb(13, 0, 48); */
     background: #F4F6F8;
     background: linear-gradient(180deg,rgb(218, 216, 216) 0%, rgba(237, 242, 247, 1) 100%);
-    width: 100vw;
-    min-height: calc(100vh - 5rem);
+    width: 100%;
+    height: calc(100vh - 5rem);
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .centerBox{
     margin-top: 5px;
     width: 85%;
     max-width: 80rem;
-    height: 45rem;
+    height: 95%;
     border-radius: 25px;
     border: 2px solid rgb(0, 0, 0);
     display: flex;
     align-items: stretch;
     overflow: hidden;
-    position: relative;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
@@ -36,6 +36,10 @@
     /* background-color: bisque; */
     background-color: #ffffff;
     width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .agendamentos{
@@ -43,9 +47,10 @@
     /* background-color: bisque; */
     background-color: #ffffff;
     width: 100%;
-    flex: 0 0 30%;
+    flex: 1;
+    height: 100%;
     overflow-y: auto;
-
+    min-height: 0;
 }
 
 .calendario{

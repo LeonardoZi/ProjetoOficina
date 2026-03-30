@@ -7,5 +7,7 @@
 }
 
 body{
-    background-color: #f0f2f5;
+    background: #F4F6F8;
+    background: linear-gradient(180deg, rgb(218, 216, 216) 0%, rgba(237, 242, 247, 1) 100%);
+    background-attachment: fixed;
 }

@@ -24,7 +24,7 @@ const Agendamentos = () => {
             <div key={agendamento.id} className={styles.cardAgendamento}>
               <div className={styles.linhaTopo}>
                 <h3>{agendamento.cliente.nome}</h3>
-                <p>Data agendada: {moment(agendamento.dataAgendada).format('DD/MM/YYYY, HH:mm')}</p>
+                <p>Data agendada: <br></br>{moment(agendamento.dataAgendada).format('DD/MM/YYYY, HH:mm')}</p>
               </div>          
               <p>OS: {agendamento.id}</p>
               <p>Veículo: {agendamento.veiculo.marca} {agendamento.veiculo.modelo}</p>

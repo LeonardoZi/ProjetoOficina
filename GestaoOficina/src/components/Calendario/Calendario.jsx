@@ -16,11 +16,13 @@ const localizer = momentLocalizer(moment);
 const Calendario = () => {
 
     const [eventsList, setEventsList] = useState([]);
+    const [eventoSelecionado, setEventoSelecionado] = useState(null);
+    const [showMoreData, setShowMoreData] = useState(null);
 
     useEffect(() => {
         fetch("https://projetooficina-la3z.onrender.com/ordens")
             .then(res => res.json())
-            .then(eventsList => {setEventsList(eventsList); console.log(eventsList)})
+            .then(eventsList => { setEventsList(eventsList); console.log(eventsList) })
             .catch(err => console.error(err))
     }, [])
 
@@ -37,28 +39,58 @@ const Calendario = () => {
 
     console.log(eventsCalendar)
 
+    const CustomDateCellWrapper = ({ children, value }) => {
+        const dayEvents = eventsCalendar.filter(ev =>
+            moment(ev.start).isSame(value, 'day')
+        );
 
-    // const [eventos, setEventos] = useState([{
-    //     id: 1,
-    //     title: 'Fox Oficina',
-    //     start: new Date(2026, 2, 19, 8, 0),
-    //     end: new Date(2026, 2, 19, 9, 0),
-    //     desc: 'Levar o Fox na oficina. OBS: Ir em 2 carros',
-    //     color: 'red',
-    //     tipo: 'atividade',
-    // },
-    // {
-    //     id: 2,
-    //     title: 'Mae Endocrino',
-    //     start: new Date(2026, 2, 19, 13, 0),
-    //     end: new Date(2026, 2, 19, 14, 0),
-    //     desc: 'Evento2',
-    //     color: 'blue',
-    //     tipo: 'atividade',
-    // }
-    // ])
+        const MAX_VISIBLE = 2;
+        const visible = dayEvents.slice(0, MAX_VISIBLE);
+        const hidden = dayEvents.slice(MAX_VISIBLE);
 
-    const [eventoSelecionado, setEventoSelecionado] = useState(null);
+        return (
+            <div style={{ position: 'relative', flex: 1, minHeight: 0 }}>
+                {React.cloneElement(children, {}, null)}
+                <div style={{ padding: '0 2px' }}>
+                    {visible.map((ev, index) => (
+                        <div
+                            key={ev.id}
+                            onClick={() => setEventoSelecionado(ev)}
+                            style={{
+                                backgroundColor: '#3174ad',
+                                color: '#fff',
+                                borderRadius: '3px',
+                                padding: '1px 4px',
+                                fontSize: '0.75rem',
+                                marginBottom: '1px',
+                                marginTop: index === 0 ? '20px' : '0px',
+                                cursor: 'pointer',
+                                overflow: 'hidden',
+                                whiteSpace: 'nowrap',
+                                textOverflow: 'ellipsis',
+                            }}
+                        >
+                            {ev.title}
+                        </div>
+                    ))}
+                    {hidden.length > 0 && (
+                        <div
+                            onClick={() => setShowMoreData({ events: dayEvents, date: value })}
+                            style={{
+                                fontSize: '0.75rem',
+                                color: '#555',
+                                cursor: 'pointer',
+                                paddingLeft: '2px',
+                            }}
+                        >
+                            +{hidden.length} mais
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
+    };
+
 
     const eventStyle = (event) => ({
         style: {
@@ -73,6 +105,11 @@ const Calendario = () => {
     const handlEventClose = () => {
         setEventoSelecionado(null);
     }
+
+    const handleShowMore = (events, date) => {
+        setShowMoreData({ events, date });
+    }
+
 
     // const moverEventos = (data) => {
     //     const { event, start, end } = data;
@@ -96,18 +133,41 @@ const Calendario = () => {
             <DragAndDropCalendar
                 defaultDate={moment().toDate()}
                 defaultView='month'
-                events={eventsCalendar}
+                // events={eventsCalendar}
+                events={[]}
                 localizer={localizer}
                 resizable
                 // onEventDrop={moverEventos}
                 // onEventResize={moverEventos}
+                popup={false}
+                onShowMore={handleShowMore}
                 onSelectEvent={handleEventClick}
                 eventPropGetter={eventStyle}
                 components={{
                     toolbar: CustomToolbar,
+                    dateCellWrapper: CustomDateCellWrapper,
                 }}
                 className={styles.calendar}
             />
+
+            {showMoreData && (
+                <div className={styles.popupOverlay} onClick={() => setShowMoreData(null)}>
+                    <div className={styles.popupBox} onClick={e => e.stopPropagation()}>
+                        <div className={styles.popupHeader}>
+                            <span>{moment(showMoreData.date).format('DD [de] MMMM')}</span>
+                            <button onClick={() => setShowMoreData(null)}>✕</button>
+                        </div>
+                        <div className={styles.popupList}>
+                            {showMoreData.events.map(evento => (
+                                <div key={evento.id} className={styles.popupItem}
+                                    onClick={() => { setEventoSelecionado(evento); setShowMoreData(null); }}>
+                                    🔵 {evento.title}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {eventoSelecionado && (
                 <EventModal
@@ -125,11 +185,11 @@ const CustomToolbar = ({ label, onView, onNavigate, views }) => {
     const [itemText, setItemText] = useState('month');
 
     const traducoesPTBR = {
-    month: 'Mês',
-    week: 'Semana',
-    day: 'Dia',
-    agenda: 'Agenda',
-    }  
+        month: 'Mês',
+        week: 'Semana',
+        day: 'Dia',
+        agenda: 'Agenda',
+    }
 
     return (
         <div className={styles.toolbarContainer}>
@@ -155,10 +215,10 @@ const CustomToolbar = ({ label, onView, onNavigate, views }) => {
 
                 </div>
 
-                <div className="toolbarNavigation" style={{marginLeft: '15px'}}>
+                <div className="toolbarNavigation" style={{ marginLeft: '15px' }}>
                     <button className='btn btn-secondary btn-ls mr-2 border-0' onClick={() => onNavigate('TODAY')}>Hoje</button>
-                    <button className='btn btn-sm mr-2 text-secondary' onClick={()=> onNavigate('PREV')} style={{marginLeft: '15px', backgroundColor: "#6c757d", borderRadius: "10px"}}><i className="bi bi-caret-left" style={{padding: "5px", color: "#fff"}}></i></button>
-                    <button className='btn btn-sm mr-2 text-secondary' onClick={()=> onNavigate('NEXT')} style={{marginLeft: '2px', backgroundColor: "#6c757d", borderRadius: "10px"}}><i className="bi bi-caret-right" style={{padding: "5px", color: "#fff"}}></i></button>
+                    <button className='btn btn-sm mr-2 text-secondary' onClick={() => onNavigate('PREV')} style={{ marginLeft: '15px', backgroundColor: "#6c757d", borderRadius: "10px" }}><i className="bi bi-caret-left" style={{ padding: "5px", color: "#fff" }}></i></button>
+                    <button className='btn btn-sm mr-2 text-secondary' onClick={() => onNavigate('NEXT')} style={{ marginLeft: '2px', backgroundColor: "#6c757d", borderRadius: "10px" }}><i className="bi bi-caret-right" style={{ padding: "5px", color: "#fff" }}></i></button>
                 </div>
 
             </div>
