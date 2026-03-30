@@ -12,13 +12,13 @@ POST http://localhost:3000/veiculos
 Content-Type: application/json
 
 {
-    "clienteId": 1,
-    "marca": "Honda",
-    "modelo": "Civic",
-    "ano": 2009,
-    "placa": "ABC1234",
-    "cor": "Dourado",
-    "observacao": "Detalhes na pintura"
+    "clienteId": 2,
+    "marca": "Toyota",
+    "modelo": "Corolla",
+    "ano": 2020,
+    "placa": "ABC1235",
+    "cor": "Prata",
+    "observacao": "Revisão"
 }
 
 ### Atualizar veículo

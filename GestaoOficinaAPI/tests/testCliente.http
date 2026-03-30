@@ -11,10 +11,10 @@ POST http://localhost:3000/clientes
 Content-Type: application/json
 
 {
-    "nome": "João Silva",
-    "telefone": "11999999999",
-    "email": "joao@gmail.com",
-    "cpf": "12345678901"
+    "nome": "Maria Clara",
+    "telefone": "11888888888",
+    "email": "maria@gmail.com",
+    "cpf": "12345678902"
 }
 
 ### Atualizar cliente
