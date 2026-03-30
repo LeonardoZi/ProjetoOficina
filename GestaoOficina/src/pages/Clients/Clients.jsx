@@ -37,7 +37,19 @@ const Clients = () => {
                                 <td>{cliente.telefone}</td>
                                 <td>{cliente.email}</td>
                                 <td>{cliente.cpf}</td>
-                                <td>Dropdownbutton</td>
+                                <td className={styles.tdBtn}>
+                                    <div className={styles.btnContainer}>
+                                        <button className='btn btn-warning'><i class="bi bi-pencil-square"></i></button>
+                                        <button className='btn btn-danger'><i class="bi bi-trash3"></i></button>
+                                        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a className="dropdown-item" href="#">Action</a></li>
+                                            <li><a className="dropdown-item" href="#">Another action</a></li>
+                                            <li><a className="dropdown-item" href="#">Something else here</a></li>
+                                            <li><button className='dropdown-item'>Ver veículos</button></li>
+                                        </ul>
+                                    </div>
+                                </td>
                             </tr>
 
                         ))}

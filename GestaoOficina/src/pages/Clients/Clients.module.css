@@ -38,13 +38,14 @@
 }
 
 .table th {
-    text-align: left;
+    text-align: center;
     padding: 12px;
     font-weight: 600;
     font-size: 14px;
 }
 
 .table td {
+    text-align: center;
     padding: 12px;
     border-bottom: 1px solid #eee;
     font-size: 14px;
@@ -74,4 +75,16 @@
 .cliente {
     padding: 10px;
     border-bottom: 1px solid #ddd;
+}
+
+.btnContainer{
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.tdBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
