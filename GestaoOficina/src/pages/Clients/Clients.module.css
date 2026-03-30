@@ -1,0 +1,77 @@
+.bodyContainer {
+    width: 100%;
+    min-height: calc(100vh - 5rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: #F4F6F8;
+    background: linear-gradient(180deg,rgb(218, 216, 216) 0%, rgba(237, 242, 247, 1) 100%);
+}
+
+.centerContainer {
+    width: 100%;
+    max-width: 1000px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tableWrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.table thead {
+    background-color: #4f7df3;
+    color: white;
+}
+
+.table th {
+    text-align: left;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.table tbody tr:hover {
+    background-color: #eef3ff;
+    transition: 0.2s;
+}
+
+@media (max-width: 768px) {
+    .centerContainer {
+        padding: 15px;
+    }
+
+    .table th,
+    .table td {
+        padding: 10px;
+        font-size: 13px;
+    }
+}
+
+.listaClientes {
+    display: none;
+}
+
+.cliente {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}

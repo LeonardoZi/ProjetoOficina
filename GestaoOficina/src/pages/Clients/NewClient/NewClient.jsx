@@ -44,6 +44,23 @@ const NewClient = () => {
   const handleSubmit = (e) => {
     (e).preventDefault();
 
+    const data = {
+      nome: name,
+      telefone: tel,
+      email: email,
+      cpf: cpf
+    }
+
+    fetch("https://projetooficina-la3z.onrender.com/clientes", {
+
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: JSON.stringify(data)
+
+    }).then(res => console.log(res))
+
     console.log("Cliente criado com sucesso", name, tel, email, cpf)
   }
 
