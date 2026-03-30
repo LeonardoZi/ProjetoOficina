@@ -6,6 +6,8 @@ Este é um painel administrativo desenvolvido para facilitar o dia a dia de ofic
 
 Este projeto foi criado com o objetivo de estudo e prática. Estou usando esse projeto como um laboratório real para me desenvolver na área de programação Full Stack. Aqui, o foco é aplicar conceitos do mercado, desde a criação da interface e experiência do usuário no Front-end, até a construção de toda a lógica, servidor e banco de dados no Back-end para o sistema funcionar de ponta a ponta.
 
+![Print da Tela de Dashboard do MotorTech](screenshots/dashboard.png)
+
 ## 💻 Tecnologias Utilizadas
 
 **Front-end**
